@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.vinicius.dscatalog.dtos.CategoryDTO;
 import com.vinicius.dscatalog.entities.Category;
 import com.vinicius.dscatalog.repositories.CategoryRepository;
+import com.vinicius.dscatalog.services.exceptions.EntityNotFoundException;
 
 @Service
 public class CategoryService {
@@ -20,5 +21,10 @@ public class CategoryService {
 	public List<CategoryDTO> findAll() {
 		List<Category> list = repository.findAll();
 		return list.stream().map(x -> new CategoryDTO(x)).toList();
+	}
+	
+	@Transactional(readOnly = true)
+	public CategoryDTO findById(Long id) {
+		return new CategoryDTO(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada")));
 	}
 }
