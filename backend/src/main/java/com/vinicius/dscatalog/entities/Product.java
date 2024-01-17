@@ -70,7 +70,7 @@ public class Product {
 	public Instant getDate() {
 		return date;
 	}
-
+	
 	public void setDate(Instant date) {
 		this.date = date;
 	}
