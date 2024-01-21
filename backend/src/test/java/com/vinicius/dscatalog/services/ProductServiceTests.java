@@ -137,7 +137,7 @@ public class ProductServiceTests {
 	}
 	
 	@Test
-	public void deleteShouldThrowDatabaseExceptionWhenDependedId() {
+	public void deleteShouldThrowResourceNotFoundExceptionWhenDependedId() {
 		Assertions.assertThrows(DatabaseException.class, () -> {
 			service.delete(dependentId);
 		});
