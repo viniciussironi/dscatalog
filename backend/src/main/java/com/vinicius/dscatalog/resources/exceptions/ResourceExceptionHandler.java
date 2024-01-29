@@ -1,9 +1,11 @@
 package com.vinicius.dscatalog.resources.exceptions;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -40,6 +42,35 @@ public class ResourceExceptionHandler {
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<StandardError> validation (MethodArgumentNotValidException e, HttpServletRequest request) {
+		ValidationError err = new ValidationError();
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Validation error");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		e.getFieldErrors().forEach(x -> err.getErrors().add(new FieldError(x.getField(), x.getDefaultMessage())));
+		
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	public ResponseEntity<StandardError> violationException (SQLIntegrityConstraintViolationException e, HttpServletRequest request) {
+		ValidationError err = new ValidationError();
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Validation error");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		err.getErrors().add(new FieldError("email", "Este email já existe"));
 		return ResponseEntity.status(status).body(err);
 	}
 }

@@ -2,9 +2,12 @@ package com.vinicius.dscatalog.dtos;
 
 import com.vinicius.dscatalog.entities.Category;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class CategoryDTO {
 	
 	private Long id;
+	@NotBlank(message = "Campo Obrigatório")
 	private String name;
 	
 	public CategoryDTO() {

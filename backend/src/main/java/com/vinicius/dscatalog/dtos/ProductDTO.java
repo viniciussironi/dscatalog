@@ -8,13 +8,24 @@ import java.util.Set;
 import com.vinicius.dscatalog.entities.Category;
 import com.vinicius.dscatalog.entities.Product;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
 public class ProductDTO {
 	
 	private Long id;
+	@Size(min = 5, max = 60, message = "Deve ter entre 5 e 60 caracteres")
+	@NotBlank(message = "Campo Obrigatório")
 	private String name;
+	@PastOrPresent(message = "A data não pode ser futura")
 	private Instant date;
+	@Positive(message = "Digite um valor válido")
 	private Double price;
+	@NotBlank(message = "Campo Obrigatório")
 	private String description;
+	@NotBlank(message = "Campo Obrigatório")
 	private String imgUrl;
 	
 	private List<CategoryDTO> categoriesDto = new ArrayList<>();
