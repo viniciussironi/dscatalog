@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.vinicius.dscatalog.dtos.UserDTO;
 import com.vinicius.dscatalog.dtos.UserInsertDTO;
+import com.vinicius.dscatalog.dtos.UserUpdateDTO;
 import com.vinicius.dscatalog.entities.User;
 import com.vinicius.dscatalog.repositories.RoleRepository;
 import com.vinicius.dscatalog.repositories.UserRepository;
@@ -51,7 +52,7 @@ public class UserService {
 	}
 	
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
 			User entity = repository.getReferenceById(id); // Evita duas idas no banco
 			dtoToEntity(dto, entity);

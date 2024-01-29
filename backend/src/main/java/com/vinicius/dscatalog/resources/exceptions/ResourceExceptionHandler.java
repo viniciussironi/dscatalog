@@ -59,18 +59,4 @@ public class ResourceExceptionHandler {
 		
 		return ResponseEntity.status(status).body(err);
 	}
-	
-	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-	public ResponseEntity<StandardError> violationException (SQLIntegrityConstraintViolationException e, HttpServletRequest request) {
-		ValidationError err = new ValidationError();
-		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
-		
-		err.setTimestamp(Instant.now());
-		err.setStatus(status.value());
-		err.setError("Validation error");
-		err.setMessage(e.getMessage());
-		err.setPath(request.getRequestURI());
-		err.getErrors().add(new FieldError("email", "Este email já existe"));
-		return ResponseEntity.status(status).body(err);
-	}
 }
