@@ -1,6 +1,5 @@
 package com.vinicius.dscatalog.resources.exceptions;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
