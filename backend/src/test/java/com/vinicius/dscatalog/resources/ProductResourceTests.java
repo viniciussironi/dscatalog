@@ -17,8 +17,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
@@ -31,7 +33,7 @@ import com.vinicius.dscatalog.services.ProductService;
 import com.vinicius.dscatalog.services.exceptions.DatabaseException;
 import com.vinicius.dscatalog.services.exceptions.ResourceNotFoundException;
 
-@WebMvcTest(ProductResource.class)
+@WebMvcTest(value = ProductResource.class, excludeAutoConfiguration = {SecurityAutoConfiguration.class})
 public class ProductResourceTests {
 	
 	@Autowired
@@ -43,7 +45,7 @@ public class ProductResourceTests {
 	@MockBean
 	private ProductService service;
 	
-	private PageImpl<ProductDTO> page;
+	private Page<ProductDTO> page;
 	private ProductDTO productDto;
 	private long existsId;
 	private long notExistsId;

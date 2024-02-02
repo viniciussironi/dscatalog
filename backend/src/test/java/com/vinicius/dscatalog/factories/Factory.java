@@ -9,7 +9,7 @@ import com.vinicius.dscatalog.entities.Product;
 public class Factory {
 	
 	public static Product createProduct() {
-		Product product = new Product(1L, "Test", "Description", 1.99, "Link", Instant.now());
+		Product product = new Product(1L, "Produto", "Description", 1.99, "Link", Instant.now());
 		product.getCategories().add(createCategory());
 		return product;
 	}
@@ -20,6 +20,6 @@ public class Factory {
 	}
 	
 	public static Category createCategory() {
-		return new Category(1L, "Test");
+		return new Category(1L, "Categoria");
 	}
 }
