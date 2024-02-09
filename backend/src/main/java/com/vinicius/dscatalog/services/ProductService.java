@@ -19,6 +19,7 @@ import com.vinicius.dscatalog.repositories.CategoryRepository;
 import com.vinicius.dscatalog.repositories.ProductRepository;
 import com.vinicius.dscatalog.services.exceptions.DatabaseException;
 import com.vinicius.dscatalog.services.exceptions.ResourceNotFoundException;
+import com.vinicius.dscatalog.util.Utils;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -36,6 +37,7 @@ public class ProductService {
 		return page.map(x -> new ProductDTO(x, x.getCategories()));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPageable(String name, String categoryId, Pageable pageable) {
 		List<Long> categoryList = Arrays.asList();
@@ -44,6 +46,7 @@ public class ProductService {
 		}
 		Page<ProductProjection> page = repository.searchProducts(categoryList, name, pageable);
 		List<Product> entities = repository.searchProductsWithCategories(page.map(x -> x.getId()).toList());
+		entities = (List<Product>) Utils.replace(page.getContent(), entities);
 		List<ProductDTO> dtos = entities.stream().map(x -> new ProductDTO(x, x.getCategories())).toList();
 		return new PageImpl<>(dtos, page.getPageable(), page.getTotalElements());
 	}
