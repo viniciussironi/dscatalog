@@ -1,26 +1,29 @@
 package com.vinicius.dscatalog.dtos;
 
-import com.vinicius.dscatalog.services.validation.UserInsertValid;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@UserInsertValid
-public class UserInsertDTO extends UserDTO {
+public class NewPasswordDTO {
 	
+	@NotBlank(message = "Campo Obrigatório")
+	private String token;
 	@NotBlank(message = "Campo Obrigatório")
 	@Size(min = 8, message = "Deve ter no mínimo 8 caracteres")
 	private String password;
 	
-	public UserInsertDTO() {
-		super();
-	}
-	
-	public String getPassword() {
-		return password;
+	public NewPasswordDTO() {
 	}
 
-	public void setPassword(String password) {
+	public NewPasswordDTO(String token, String password) {
+		this.token = token;
 		this.password = password;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 }
