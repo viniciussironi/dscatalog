@@ -4,13 +4,11 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
+import com.vinicius.dscatalog.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import com.vinicius.dscatalog.dtos.EmailDTO;
@@ -38,8 +36,8 @@ public class AuthService {
 	private UserRepository  userRepository;
 	@Autowired
 	private PasswordRecoverRepository passwordRecoverRepository;
-	
-	
+	@Autowired
+	private UserUtil userUtil;
 	@Autowired
 	private EmailService emailService;
 	
@@ -76,9 +74,7 @@ public class AuthService {
 	
 	protected User authenticated() {
 		  try {
-		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		    Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
-		    String username = jwtPrincipal.getClaim("username");
+		    String username = userUtil.getLoggedUsername();
 		    return userRepository.findByEmail(username);
 		  }
 		  catch (Exception e) {

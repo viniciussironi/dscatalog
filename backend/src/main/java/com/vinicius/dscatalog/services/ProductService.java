@@ -19,7 +19,7 @@ import com.vinicius.dscatalog.repositories.CategoryRepository;
 import com.vinicius.dscatalog.repositories.ProductRepository;
 import com.vinicius.dscatalog.services.exceptions.DatabaseException;
 import com.vinicius.dscatalog.services.exceptions.ResourceNotFoundException;
-import com.vinicius.dscatalog.util.Utils;
+import com.vinicius.dscatalog.utils.Utils;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -39,7 +39,7 @@ public class ProductService {
 
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
-	public Page<ProductDTO> findAllPageable(String name, String categoryId, Pageable pageable) {
+	public Page<ProductDTO> searchAllByNameOrCategoryId(String name, String categoryId, Pageable pageable) {
 		List<Long> categoryList = Arrays.asList();
 		if(!"0".equals(categoryId)) {
 			categoryList = Arrays.asList(categoryId.split(",")).stream().map(Long::parseLong).toList();

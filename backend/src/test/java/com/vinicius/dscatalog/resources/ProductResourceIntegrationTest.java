@@ -37,7 +37,9 @@ public class ProductResourceIntegrationTest {
 	private Long nonExistingId;
 	private Long countTotalProducts;
 	
-	private String username, password, bearerToken;
+	private String username;
+	private String password;
+	private String bearerToken;
 	
 	@BeforeEach
 	void setUp() throws Exception {

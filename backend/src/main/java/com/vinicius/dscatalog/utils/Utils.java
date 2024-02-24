@@ -1,4 +1,4 @@
-package com.vinicius.dscatalog.util;
+package com.vinicius.dscatalog.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

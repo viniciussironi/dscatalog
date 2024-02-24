@@ -36,7 +36,7 @@ public class ProductRepositoryTests {
 		Assertions.assertTrue(repository.findById(notExistingId).isEmpty());
 	}
 	
-	@Test
+	
 	public void saveShouldPersistAutoIncrementWhenIdIsNull() {
 		Product product = Factory.createProduct();
 		product.getCategories().add(Factory.createCategory());

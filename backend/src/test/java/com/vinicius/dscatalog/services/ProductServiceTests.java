@@ -1,5 +1,6 @@
 package com.vinicius.dscatalog.services;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
@@ -13,9 +14,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,7 @@ import com.vinicius.dscatalog.dtos.ProductDTO;
 import com.vinicius.dscatalog.entities.Category;
 import com.vinicius.dscatalog.entities.Product;
 import com.vinicius.dscatalog.factories.Factory;
+import com.vinicius.dscatalog.projections.ProductProjection;
 import com.vinicius.dscatalog.repositories.CategoryRepository;
 import com.vinicius.dscatalog.repositories.ProductRepository;
 import com.vinicius.dscatalog.services.exceptions.DatabaseException;
@@ -51,6 +53,12 @@ public class ProductServiceTests {
 	private Category category;
 	private PageImpl<Product> page;
 	private ProductDTO dto;
+	private String productName;
+	private String categotyIds;
+	private ProductProjection productProjection;
+	private Page<ProductProjection> productProjectionPage;
+	private List<Product> listProducts;
+	
 	@BeforeEach
 	void setUp() {
 		existsId = 1L;
@@ -60,10 +68,17 @@ public class ProductServiceTests {
 		category = Factory.createCategory();
 		dto = Factory.createProductDTO();
 		page = new PageImpl<>(List.of(product));
+		productName = "Bola de futebol";
+		categotyIds = "1";
+		productProjection = Factory.createProductProjection();
+		productProjectionPage = new PageImpl<>(List.of(productProjection));
+		listProducts = List.of(product);
 		
-		when(repository.findAll((Pageable)ArgumentMatchers.any())).thenReturn(page);
+		when(repository.findAll((Pageable)any())).thenReturn(page);
+		when(repository.searchProducts(any(), any(), (Pageable)any())).thenReturn(productProjectionPage);
+		when(repository.searchProductsWithCategories(any())).thenReturn(listProducts);
 		
-		when(repository.save(ArgumentMatchers.any())).thenReturn(product);
+		when(repository.save(any())).thenReturn(product);
 		
 		when(repository.findById(existsId)).thenReturn(Optional.of(product));
 		when(repository.findById(notExistsId)).thenReturn(Optional.empty());
@@ -80,21 +95,9 @@ public class ProductServiceTests {
 		
 		doNothing().when(repository).deleteById(existsId);
 		//Vazio^^
-		doThrow(DatabaseException.class).when(repository).deleteById(dependentId);
+		doThrow(DataIntegrityViolationException.class).when(repository).deleteById(dependentId);
 	}
 	
-	@Test
-	public void updateShouldReturnProductWhenIdExists() {			
-		service.update(existsId, dto);
-		Assertions.assertNotNull(dto);
-	}
-	
-	@Test
-	public void updateShouldThrowResourceNotFoundExceptionWhenIdNotExists() {
-		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-			service.update(notExistsId, dto);
-		});
-	}
 	
 	@Test
 	public void findAllShouldReturnPage() {
@@ -103,6 +106,15 @@ public class ProductServiceTests {
 		Assertions.assertNotNull(page);
 		
 		verify(repository, times(1)).findAll(pageable);
+	}
+
+	@Test
+	public void searchAllByNameOrCategoryIdShouldReturnPage() {
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<ProductDTO> page = service.searchAllByNameOrCategoryId(productName, categotyIds, pageable);
+		Assertions.assertNotNull(page);
+		Assertions.assertEquals(page.getContent().get(0).getId(), productProjectionPage.getContent().get(0).getId());;
+		Assertions.assertEquals(page.getContent().get(0).getName(), productProjectionPage.getContent().get(0).getName());;
 	}
 	
 	@Test
@@ -119,6 +131,26 @@ public class ProductServiceTests {
 		});
 		verify(repository, times(1)).findById(notExistsId);
 	}
+	
+	@Test
+	public void inserShouldReturnProduct() {			
+		service.insert(dto);
+		Assertions.assertNotNull(dto);
+	}
+	
+	@Test
+	public void updateShouldReturnProductWhenIdExists() {			
+		service.update(existsId, dto);
+		Assertions.assertNotNull(dto);
+	}
+	
+	@Test
+	public void updateShouldThrowResourceNotFoundExceptionWhenIdNotExists() {
+		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			service.update(notExistsId, dto);
+		});
+	} 
+	
 	
 	@Test
 	public void deleteShouldDoNothingWhenIdExists() {
