@@ -1,0 +1,40 @@
+.app-header{
+    height: 70px;
+    background-color: #407BFF;
+    color: #FFFF;
+}
+
+.app-header div {
+    max-width: 1440px;
+    height: 70px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.app-header h1 {
+    size: 24px;
+}
+
+.app-header nav {
+   text-align: center;
+   margin: 0 auto;
+}
+
+.app-header ul {
+    display: flex;
+}
+
+.app-header li {
+    list-style-type: none;
+    margin: 0 35px;
+}
+
+.app-header a {
+    text-decoration: none;
+    color: #FFFF;
+    font: 18px;
+}
+
+.app-header li a:hover {
+    color: #dededeee;
+}
