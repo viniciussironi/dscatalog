@@ -2,17 +2,17 @@
     <div class="esquerda">
         <h1>Divulgue seus produtos no DS Catalog</h1>
         <p>Faça parte do nosso catálogo de divulgação e aumente a venda dos seus produtos.</p>
-        <img ngSrc="/assets/login.png" alt="Imagem da tela de login" height="478" width="535">
+        <img ngSrc="/assets/login.png" alt="Imagem da tela de login" height="478" width="535" priority>
     </div>
-    <div class="login">
+    <div class="direita">
         <h2>LOGIN</h2>
-        <form action="">
+        <form action="" class="login" [formGroup]="loginForm">
             <div>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Senha">
+                <input type="text" placeholder="Email" formControllName="email">
+                <input type="text" placeholder="Senha" formControllName="password">
                 <a href="">Esqueceu a senha?</a>
             </div>
-            <input type="submit" value="Logar">
+            <app-button-principal btn-text="LOGAR" (click)="onSubmit()"></app-button-principal>
         </form>
         <p>Não tem cadastro? <a href="">CADASTRAR</a></p>
     </div>

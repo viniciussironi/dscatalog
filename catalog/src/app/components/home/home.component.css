@@ -29,22 +29,5 @@
     font-size: 24px;
     color: #9E9E9E;
     margin-top: 20px;
-}
-
-.app-home button {
-    background-color: #407BFF;
-    color: #FFFFFF;
-    font-size: 24px;
-    text-align: center;
-    width: 450px;
-    height: 70px;
-    border: none;
-    border-radius: 9px;
-    cursor: pointer;
-    position: absolute;
-    top: 670px
-}
-
-.app-home button:hover {
-    background-color: #407cffe4;
+    margin-bottom: 165px;
 }
