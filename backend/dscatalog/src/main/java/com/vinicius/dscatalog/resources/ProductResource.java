@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +26,8 @@ public class ProductResource {
 			@RequestParam(name = "name", defaultValue = "") String name,
 			@RequestParam(name = "categoryId", defaultValue = "0") String categoryId,
 			Pageable pageable) {
-		return ResponseEntity.ok().body(service.searchAllByNameOrCategoryId(name, categoryId, pageable));
+		PageRequest request = PageRequest.of(pageable.getPageNumber(), 8);
+		return ResponseEntity.ok().body(service.searchAllByNameOrCategoryId(name, categoryId, request));
 	}
 
 	@Autowired

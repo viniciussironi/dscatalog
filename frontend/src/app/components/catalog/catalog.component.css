@@ -1,0 +1,107 @@
+.app-catalog {
+    width: 1082px;
+    margin: 0 auto;
+}
+
+.app-catalog h2 {
+    font-size: 24px;
+    color: #263238;
+    margin: 20px 0;
+}
+
+form {
+    width: 1082px;
+    height: 60px;
+    background-color: #fff;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+form input, form select {
+    height: 28px;
+    font-size: 18px;
+    color: #9E9E9E;
+}
+
+form input[type = text] {
+    width: 430px;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid #E1E1E1;
+}
+
+form button {
+    background-color: #fff;
+    color: #9E9E9E;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    left: -25px;
+    top: 3px;
+}
+
+form select {
+    width: 297px;
+    border: none;
+    border-bottom: 1px solid #E1E1E1;
+}
+form input[type = reset] {
+    width: 218px;
+    height: 38px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid #E1E1E1;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.produtos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.produto {
+    margin: 10px;
+    border-radius: 13px;
+    background-color: #fff;
+    width: 248px;
+    height: 316px;
+    text-align: center;
+    cursor: pointer;
+}
+.produto:hover {
+    opacity: 0.8;
+}
+
+.produto img {
+    width: 165px;
+    height: 165px;
+    margin: 10px;
+}
+
+.produto h3 {
+    font-size: 18px;
+    border-top: 1px solid #E1E1E1; 
+    padding-top: 15px;
+    color: #263238;
+}
+
+.produto p {
+    margin: 15px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #407BFF;
+}
+
+.produto span {
+    font-size: 18px;
+    font-weight: 400;
+    color: #9E9E9E;
+    position: relative;
+    top: -9px;
+    left: -5px;
+}
