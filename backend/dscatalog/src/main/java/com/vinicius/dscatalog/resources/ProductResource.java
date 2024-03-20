@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/products")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:4200/catalog")
 public class ProductResource {
 
 	@GetMapping
