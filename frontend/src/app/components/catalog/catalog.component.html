@@ -5,17 +5,15 @@
             <input type="text" placeholder="Nome do produto">
             <button><span class="material-symbols-outlined">search</span></button>
         </div>
-        <select name="categoria">
-            <option value="">Categoria</option>
-            <option value="livros">Livros</option>
-            <option value="eletronicos">Eletrônicos</option>
-            <option value="computadores">Computadores</option>
+        <select name="categoria" >
+            <option value="">Categorias</option>
+            <option *ngFor="let category of categories.content" value="{{category.name}}">{{category.name}}</option>
         </select>
         <input type="reset" value="LIMPAR FILTRO">
     </form>
     <div class="produtos">
         <div *ngFor="let product of page.content" class="produto">
-            <img src="{{product.imgUrl}}" alt="Imagem produto">
+            <img src="{{ product.imgUrl }}" alt="Imagem produto">
             <h3>{{ product.name }}</h3> 
             <p><span>R$</span>{{ product.price }}</p> 
         </div> 
@@ -23,7 +21,7 @@
     <div>
         <ul>
             <li>
-                <button>2</button>
+                <button (click)="getProducts(1)">2</button>
             </li>
             <li>
                 <button>3</button>

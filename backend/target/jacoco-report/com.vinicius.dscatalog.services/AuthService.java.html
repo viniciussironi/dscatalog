@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuthService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dscatalog</a> &gt; <a href="index.source.html" class="el_package">com.vinicius.dscatalog.services</a> &gt; <span class="el_source">AuthService.java</span></div><h1>AuthService.java</h1><pre class="source lang-java linenums">package com.vinicius.dscatalog.services;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.stereotype.Service;
+
+import com.vinicius.dscatalog.dtos.EmailDTO;
+import com.vinicius.dscatalog.dtos.NewPasswordDTO;
+import com.vinicius.dscatalog.entities.PasswordRecover;
+import com.vinicius.dscatalog.entities.User;
+import com.vinicius.dscatalog.repositories.PasswordRecoverRepository;
+import com.vinicius.dscatalog.repositories.UserRepository;
+import com.vinicius.dscatalog.services.exceptions.ResourceNotFoundException;
+
+import jakarta.transaction.Transactional;
+
+@Service
+<span class="fc" id="L27">public class AuthService {</span>
+	
+	@Value(&quot;${email.password-recover.token.minutes}&quot;) 
+	private Long tokenMinutes;
+	
+	@Value(&quot;${email.password-recover.uri}&quot;) 
+	private String recoverUri;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private UserRepository  userRepository;
+	@Autowired
+	private PasswordRecoverRepository passwordRecoverRepository;
+	
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@Transactional
+	public void createRecoverToken(EmailDTO dto) {
+<span class="nc" id="L48">		User user = userRepository.findByEmail(dto.getEmail());</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		if(user == null) {</span>
+<span class="nc" id="L50">			throw new ResourceNotFoundException(&quot;E-mail não encontrado&quot;);</span>
+		}	
+<span class="nc" id="L52">		PasswordRecover entity = new PasswordRecover();</span>
+<span class="nc" id="L53">		entity.setEmail(dto.getEmail());</span>
+<span class="nc" id="L54">		entity.setToken(UUID.randomUUID().toString());</span>
+<span class="nc" id="L55">		entity.setExpiration(Instant.now().plusSeconds(tokenMinutes * 60L));</span>
+		
+<span class="nc" id="L57">		passwordRecoverRepository.save(entity);</span>
+<span class="nc" id="L58">		String body = &quot;Acesse o link para redefinir sua senha\n\n&quot;</span>
+<span class="nc" id="L59">				+ recoverUri + entity.getToken() + &quot;\nValidade de &quot; + tokenMinutes + &quot; minutos!&quot;;</span>
+		
+<span class="nc" id="L61">		emailService.sendEmail(dto.getEmail(), &quot;Recuperção de senha&quot;, body);</span>
+<span class="nc" id="L62">	}</span>
+	
+	@Transactional
+	public void saveNewPassword(NewPasswordDTO dto) {
+<span class="nc" id="L66">		List&lt;PasswordRecover&gt; list = passwordRecoverRepository.searchValidTokens(dto.getToken(), Instant.now());</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">		if(list.size() == 0) {</span>
+<span class="nc" id="L68">			throw new ResourceNotFoundException(&quot;Token não encontrado&quot;);</span>
+		}
+		
+<span class="nc" id="L71">		User user = userRepository.findByEmail(list.get(0).getEmail());</span>
+<span class="nc" id="L72">		user.setPassword(passwordEncoder.encode(dto.getPassword()));</span>
+		
+<span class="nc" id="L74">		user = userRepository.save(user);</span>
+<span class="nc" id="L75">	}</span>
+	
+	protected User authenticated() {
+		  try {
+<span class="nc" id="L79">		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();</span>
+<span class="nc" id="L80">		    Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();</span>
+<span class="nc" id="L81">		    String username = jwtPrincipal.getClaim(&quot;username&quot;);</span>
+<span class="nc" id="L82">		    return userRepository.findByEmail(username);</span>
+		  }
+<span class="nc" id="L84">		  catch (Exception e) {</span>
+<span class="nc" id="L85">		    throw new UsernameNotFoundException(&quot;Invalid user&quot;);</span>
+		  }
+		}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

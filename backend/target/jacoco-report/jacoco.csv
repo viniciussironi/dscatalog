@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+dscatalog,com.vinicius.dscatalog.services,EmailService,29,3,0,0,10,1,1,1,1,1
+dscatalog,com.vinicius.dscatalog.services,CategoryService,84,17,2,0,18,3,6,3,5,3
+dscatalog,com.vinicius.dscatalog.services,AuthService,116,3,4,0,25,1,5,1,3,1
+dscatalog,com.vinicius.dscatalog.services,UserService,159,56,2,4,32,11,11,4,10,2
+dscatalog,com.vinicius.dscatalog.services,ProductService,0,210,0,4,0,38,0,15,0,13
+dscatalog,com.vinicius.dscatalog.resources,UserResource,60,3,0,0,13,1,6,1,6,1
+dscatalog,com.vinicius.dscatalog.resources,AuthResource,14,3,0,0,4,1,2,1,2,1
+dscatalog,com.vinicius.dscatalog.resources,CategoryResource,54,3,0,0,12,1,5,1,5,1
+dscatalog,com.vinicius.dscatalog.resources,ProductResource,0,59,0,0,0,14,0,6,0,6

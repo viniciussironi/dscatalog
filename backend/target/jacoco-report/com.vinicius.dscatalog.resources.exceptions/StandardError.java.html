@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StandardError.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dscatalog</a> &gt; <a href="index.source.html" class="el_package">com.vinicius.dscatalog.resources.exceptions</a> &gt; <span class="el_source">StandardError.java</span></div><h1>StandardError.java</h1><pre class="source lang-java linenums">package com.vinicius.dscatalog.resources.exceptions;
+
+import java.time.Instant;
+
+public class StandardError {
+	
+	private Instant timestamp;
+    private Integer status;
+    private String error;
+	private String message;
+    private String path;
+	
+<span class="fc" id="L13">	public StandardError() {</span>
+<span class="fc" id="L14">	}</span>
+
+	public Instant getTimestamp() {
+<span class="fc" id="L17">		return timestamp;</span>
+	}
+
+	public void setTimestamp(Instant timestamp) {
+<span class="fc" id="L21">		this.timestamp = timestamp;</span>
+<span class="fc" id="L22">	}</span>
+
+	public Integer getStatus() {
+<span class="fc" id="L25">		return status;</span>
+	}
+
+	public void setStatus(Integer status) {
+<span class="fc" id="L29">		this.status = status;</span>
+<span class="fc" id="L30">	}</span>
+
+	public String getError() {
+<span class="fc" id="L33">		return error;</span>
+	}
+
+	public void setError(String error) {
+<span class="fc" id="L37">		this.error = error;</span>
+<span class="fc" id="L38">	}</span>
+
+	public String getMessage() {
+<span class="fc" id="L41">		return message;</span>
+	}
+
+	public void setMessage(String message) {
+<span class="fc" id="L45">		this.message = message;</span>
+<span class="fc" id="L46">	}</span>
+
+	public String getPath() {
+<span class="fc" id="L49">		return path;</span>
+	}
+
+	public void setPath(String path) {
+<span class="fc" id="L53">		this.path = path;</span>
+<span class="fc" id="L54">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

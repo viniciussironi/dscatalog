@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.vinicius.dscatalog.DscatalogApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.62 s -- in com.vinicius.dscatalog.DscatalogApplicationTests

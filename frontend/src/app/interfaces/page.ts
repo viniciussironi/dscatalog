@@ -1,5 +1,5 @@
-export interface Page<ProductInterface> {
-    content : ProductInterface[];
+export interface Page<T> {
+    content : T[];
     totalPages: number;
     number: number;
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dscatalog</a> &gt; <a href="index.source.html" class="el_package">com.vinicius.dscatalog.services</a> &gt; <span class="el_source">ProductService.java</span></div><h1>ProductService.java</h1><pre class="source lang-java linenums">package com.vinicius.dscatalog.services;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.vinicius.dscatalog.dtos.ProductDTO;
+import com.vinicius.dscatalog.entities.Product;
+import com.vinicius.dscatalog.projections.ProductProjection;
+import com.vinicius.dscatalog.repositories.CategoryRepository;
+import com.vinicius.dscatalog.repositories.ProductRepository;
+import com.vinicius.dscatalog.services.exceptions.DatabaseException;
+import com.vinicius.dscatalog.services.exceptions.ResourceNotFoundException;
+import com.vinicius.dscatalog.util.Utils;
+
+import jakarta.persistence.EntityNotFoundException;
+
+@Service
+<span class="fc" id="L27">public class ProductService {</span>
+	
+	@Autowired
+	private ProductRepository repository;
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
+	@Transactional(readOnly = true)
+	public Page&lt;ProductDTO&gt; findAll(Pageable pageable) {
+<span class="fc" id="L36">		Page&lt;Product&gt; page = repository.findAll(pageable);</span>
+<span class="fc" id="L37">		return page.map(x -&gt; new ProductDTO(x, x.getCategories()));</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	@Transactional(readOnly = true)
+	public Page&lt;ProductDTO&gt; searchAllByNameOrCategoryId(String name, String categoryId, Pageable pageable) {
+<span class="fc" id="L43">		List&lt;Long&gt; categoryList = Arrays.asList();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">		if(!&quot;0&quot;.equals(categoryId)) {</span>
+<span class="fc" id="L45">			categoryList = Arrays.asList(categoryId.split(&quot;,&quot;)).stream().map(Long::parseLong).toList();</span>
+		}
+<span class="fc" id="L47">		Page&lt;ProductProjection&gt; page = repository.searchProducts(categoryList, name, pageable);</span>
+<span class="fc" id="L48">		List&lt;Product&gt; entities = repository.searchProductsWithCategories(page.map(x -&gt; x.getId()).toList());</span>
+<span class="fc" id="L49">		entities = (List&lt;Product&gt;) Utils.replace(page.getContent(), entities);</span>
+<span class="fc" id="L50">		List&lt;ProductDTO&gt; dtos = entities.stream().map(x -&gt; new ProductDTO(x, x.getCategories())).toList();</span>
+<span class="fc" id="L51">		return new PageImpl&lt;&gt;(dtos, page.getPageable(), page.getTotalElements());</span>
+	}
+	
+	@Transactional(readOnly = true)
+	public ProductDTO findById(Long id) {
+<span class="fc" id="L56">		Product entity = repository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;Produto não encotrado&quot;));</span>
+<span class="fc" id="L57">		return new ProductDTO(entity, entity.getCategories());</span>
+	}
+	
+	@Transactional
+	public ProductDTO insert(ProductDTO dto) {
+<span class="fc" id="L62">		Product entity = new Product();</span>
+<span class="fc" id="L63">		dtoToEntity(dto, entity);</span>
+<span class="fc" id="L64">		entity = repository.save(entity);</span>
+<span class="fc" id="L65">		return new ProductDTO(entity);</span>
+	}
+	
+	@Transactional
+	public ProductDTO update(Long id, ProductDTO dto) {
+		try {
+<span class="fc" id="L71">			Product entity = repository.getReferenceById(id); // Evita duas idas no banco</span>
+<span class="fc" id="L72">			dtoToEntity(dto, entity);</span>
+<span class="fc" id="L73">			entity = repository.save(entity);</span>
+<span class="fc" id="L74">			return new ProductDTO(entity);</span>
+		} 
+<span class="fc" id="L76">		catch (EntityNotFoundException e) {</span>
+<span class="fc" id="L77">			throw new ResourceNotFoundException(&quot;Produto não encotrado&quot;);</span>
+		}	
+	}
+	
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public void delete(Long id) {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if(!repository.existsById(id)) {</span>
+<span class="fc" id="L84">			throw new ResourceNotFoundException(&quot;Produto não encotrado&quot;);</span>
+		}
+		try {
+<span class="fc" id="L87">			repository.deleteById(id);</span>
+<span class="fc" id="L88">		} </span>
+<span class="fc" id="L89">		catch (DataIntegrityViolationException e) {</span>
+<span class="fc" id="L90">			throw new DatabaseException(&quot;Falha de integridade&quot;);</span>
+		}
+<span class="fc" id="L92">	}</span>
+	
+	public void dtoToEntity(ProductDTO dto, Product entity) {
+<span class="fc" id="L95">		entity.setName(dto.getName());</span>
+<span class="fc" id="L96">		entity.setDate(dto.getDate());</span>
+<span class="fc" id="L97">		entity.setPrice(dto.getPrice());</span>
+<span class="fc" id="L98">		entity.setDescription(dto.getDescription());</span>
+<span class="fc" id="L99">		entity.setImgUrl(dto.getImgUrl());</span>
+		
+<span class="fc" id="L101">		entity.getCategories().clear();</span>
+<span class="fc" id="L102">		dto.getCategories().forEach(x -&gt; entity.getCategories().add(categoryRepository.getReferenceById(x.getId())));</span>
+<span class="fc" id="L103">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
