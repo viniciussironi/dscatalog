@@ -2,8 +2,8 @@
     <h2>Catálogo de produtos</h2>
     <form class="busca">
         <div>
-            <input type="text" placeholder="Nome do produto">
-            <button><span class="material-symbols-outlined">search</span></button>
+            <input type="text" placeholder="Nome do produto" >
+            <button  (click)="getProducts(0, 'pc')"><span class="material-symbols-outlined">search</span></button>
         </div>
         <select name="categoria" >
             <option value="">Categorias</option>
@@ -12,21 +12,17 @@
         <input type="reset" value="LIMPAR FILTRO">
     </form>
     <div class="produtos">
-        <div *ngFor="let product of page.content" class="produto">
+        <div *ngFor="let product of products.content" class="produto">
             <img src="{{ product.imgUrl }}" alt="Imagem produto">
             <h3>{{ product.name }}</h3> 
-            <p><span>R$</span>{{ product.price }}</p> 
+            <p><span>R$</span>{{ product.price | number: '.2-2' }}</p> 
         </div> 
     </div>
     <div>
-        <ul>
-            <li>
-                <button (click)="getProducts(1)">2</button>
-            </li>
-            <li>
-                <button>3</button>
-            </li>
-        </ul>
+        <button (click)="getProducts(0, 'pc')">1</button>
+        <button (click)="getProducts(1, '')">2</button>
+        <button (click)="getProducts(2, '')">3</button>
+        <button (click)="getProducts(3, '')">4</button>
     </div>
 </section>
 

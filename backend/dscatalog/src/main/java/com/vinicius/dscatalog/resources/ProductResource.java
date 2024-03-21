@@ -18,8 +18,11 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/products")
-@CrossOrigin("http://localhost:4200/catalog")
+//@CrossOrigin(value = "http://localhost:4200")
 public class ProductResource {
+
+	@Autowired
+	private ProductService service;
 
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> searchAllByNameOrCategoryId(
@@ -30,19 +33,16 @@ public class ProductResource {
 		return ResponseEntity.ok().body(service.searchAllByNameOrCategoryId(name, categoryId, request));
 	}
 
-	@Autowired
-	private ProductService service;
-
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.findById(id));
 	}
-	
+
 	@PostMapping
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
 	public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
 		dto = service.insert(dto);
-		
+
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
@@ -50,14 +50,14 @@ public class ProductResource {
 				.toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
+
 	@PutMapping(value = "/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
 	public ResponseEntity<ProductDTO> update(@PathVariable Long id,@Valid @RequestBody ProductDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
@@ -65,3 +65,4 @@ public class ProductResource {
 		return ResponseEntity.noContent().build();
 	}
 }
+

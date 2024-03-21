@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { ButtonPrincipalComponent } from '../button-principal/button-principal.component';
+import { ButtonPrincipalComponent } from '../buttons/button-principal/button-principal.component';
 
 @Component({
   selector: 'app-home',

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductInterface } from '../../interfaces/products';
@@ -13,13 +13,13 @@ export class ProductService {
 
 
   constructor(private http: HttpClient) {}
-  headers = new HttpHeaders();
-  params!: [
-    page: string,
-    categoryName: string,
-    productName: string
-  ]
-  getProducts(pageNumber: number): Observable<Page<ProductInterface>> {
-    return this.http.get<Page<ProductInterface>>(this.url+"?page="+pageNumber)
+  
+  getProducts(pageNumber: string, productName: string, categoryId: string): Observable<Page<ProductInterface>> {
+    let params = new HttpParams()
+    .set('page', pageNumber)
+    .set('name', productName)
+    .set('categoryId', categoryId);
+    
+    return this.http.get<Page<ProductInterface>>(this.url, {params})
   }
 }

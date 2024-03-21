@@ -1,9 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { emit } from 'process';
-import { EventEmitter } from 'stream';
-import { ButtonPrincipalComponent } from '../button-principal/button-principal.component';
+import { ButtonPrincipalComponent } from '../buttons/button-principal/button-principal.component';
 
 
 @Component({

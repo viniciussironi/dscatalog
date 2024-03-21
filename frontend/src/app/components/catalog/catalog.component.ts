@@ -15,20 +15,21 @@ import { CategoryInterface } from '../../interfaces/category';
 })
 
 export class CatalogComponent implements OnInit {
-  page: Page<ProductInterface> = { content: [], totalPages: 0, number: 0 };
+  products: Page<ProductInterface> = { content: [], totalPages: 0, number: 0 };
   categories: Page<CategoryInterface> = { content: [], totalPages: 0, number: 0 };
   
   constructor(private productService: ProductService, private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.getProducts(0);
+    this.getProducts(0, "");
     this.getCategories();
   }
 
-  getProducts(pageNumber: number) {
-    this.productService.getProducts(pageNumber).subscribe((page: Page<ProductInterface>) => {
-      this.page = page;
-    });
+  getProducts(pageNumber: number, productName: string) {
+    this.productService.getProducts(pageNumber + "", productName, "").subscribe(
+      (products: Page<ProductInterface>) => {
+        this.products = products;
+      });
   }
 
   getCategories() {
