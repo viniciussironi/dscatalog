@@ -1,0 +1,15 @@
+<section class="app-user-crud">
+    <h2>DADOS DO USUÁRIO</h2>
+    <div class="inputs">
+        <form (submit)="onSubmit($event)">
+            <input type="text" placeholder="Nome" [formControl]="firstName">
+            <input type="text" placeholder="Sobrenome" [formControl]="lastName">
+            <input type="email" placeholder="Email" [formControl]="email">
+            <input type="password" placeholder="Senha" [formControl]="password">
+            <input type="password" placeholder="Repita a senha">
+            <div>
+                <app-buttons-crud (click)="onSubmit($event)"></app-buttons-crud>
+            </div>
+        </form> 
+    </div>
+</section>

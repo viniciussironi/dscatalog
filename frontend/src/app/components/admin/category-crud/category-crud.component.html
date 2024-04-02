@@ -1,0 +1,11 @@
+<section class="app-category-crud">
+    <h2>DADOS DA CATEGORIA</h2>
+    <div class="inputs">
+        <form (submit)="onSubmit($event)">
+            <input type="text" placeholder="Nome" [formControl]="categoryName">
+            <div>
+                <app-buttons-crud (click)="onSubmit($event)"></app-buttons-crud>
+            </div>
+        </form> 
+    </div>
+</section>

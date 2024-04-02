@@ -6,7 +6,7 @@
 .app-catalog h2 {
     font-size: 24px;
     color: #263238;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 form {
@@ -14,10 +14,13 @@ form {
     height: 60px;
     background-color: #fff;
     border-radius: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    box-shadow: 
+    0 5px  10px 0 rgba(0, 0, 0, 0.2), 
+    0 10px 25px 0 rgba(0, 0, 0, 0.19);
 }
 form input, form select {
     height: 28px;
@@ -59,19 +62,27 @@ form input[type = reset] {
 }
 
 .produtos {
+    flex: 1 1 0%;
     display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    justify-content: space-between
+    gap: 30px;
+    width: 1082px;
+    height: 662px;
 }
 
 .produto {
-    margin: 15px 0;
     border-radius: 13px;
     background-color: #fff;
     width: 248px;
     height: 316px;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
+    box-shadow: 
+    0 5px  10px 0 rgba(0, 0, 0, 0.2), 
+    0 10px 25px 0 rgba(0, 0, 0, 0.19);
 }
 .produto:hover {
     opacity: 0.8;
@@ -104,4 +115,42 @@ form input[type = reset] {
     position: relative;
     top: -9px;
     left: -5px;
+}
+
+.pages {
+   margin-top: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.pages button {
+    margin: 0 10px;
+    background-color: #E1E1E1;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pages button:hover {
+    background-color: #407BFF;
+}
+
+.pages button.selected {
+    background-color: #407BFF;
+}
+
+.pages span {
+    font-size: 26px;
+    cursor: pointer;
+    color: #9E9E9E;
+}
+
+.pages span:hover, 
+.pages span.active {
+    color: #407BFF;
 }

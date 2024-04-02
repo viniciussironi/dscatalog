@@ -1,7 +1,6 @@
 .app-header{
     height: 70px;
     background-color: #407BFF;
-    color: #FFFF;
 }
 
 .app-header div {
@@ -13,6 +12,11 @@
 }
 .app-header h1 {
     size: 24px;
+}
+
+.app-header a {
+    text-decoration: none;
+    color: #FFFF;
 }
 
 .app-header nav {
@@ -29,12 +33,19 @@
     margin: 0 35px;
 }
 
-.app-header a {
+.app-header li a {
     text-decoration: none;
-    color: #FFFF;
+    color: #FFFFFF80;
     font: 18px;
+    cursor: pointer;
 }
 
 .app-header li a:hover {
-    color: #dededeee;
+    color: #fff;
 }
+
+.app-header li a.selected {
+    color: #fff;
+}
+
+

@@ -3,9 +3,9 @@
         <h1><a href="/">DS Catalog</a></h1>
         <nav>
             <ul>
-                <li><a href="/">HOME</a></li>
-                <li><a href="/catalog">CATÁLOGO</a></li>
-                <li><a href="/admin">ADMIN</a></li> 
+                <li><a routerLink="/" [ngClass]="{'selected': isActive('/')}" (click)="setActive('/')">HOME</a></li>
+                <li><a routerLink="/product" [ngClass]="{'selected': isActive('/product')}" (click)="setActive('/product')">CATÁLOGO</a></li>
+                <li><a routerLink="/admin/product" [ngClass]="{'selected': isActive('/admin')}" (click)="setActive('/admin')">ADMIN</a></li> 
             </ul>
         </nav>
     </div>

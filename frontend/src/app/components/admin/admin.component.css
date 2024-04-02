@@ -1,0 +1,42 @@
+.app-admin {
+    display: flex;
+}
+
+nav {
+    background-color: #fff; 
+    height: 100vh; 
+    width: 300px;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+}
+
+nav ul a {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #9E9E9E;
+    padding: 20px 50px 20px 20px;
+}
+
+nav ul a:hover {
+    color: #407BFF;
+    background-color: #407BFF4D;
+}
+
+div {
+    margin: 40px auto;
+    background-color: #fff;
+    height: 780px; 
+    width: 1055px;
+    border-radius: 25px;
+    box-shadow: 
+    0 5px  10px 0 rgba(0, 0, 0, 0.2), 
+    0 10px 25px 0 rgba(0, 0, 0, 0.19);
+}
+
+h2 {
+    font-size: 24px;
+}

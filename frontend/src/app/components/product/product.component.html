@@ -1,0 +1,14 @@
+<section class="app-product">
+    <a href="/product"><button><span class="material-symbols-outlined">arrow_back_ios</span>VOLTAR</button></a>
+    <div class="intern">
+        <div class="left">
+            <img src="{{ product.imgUrl }}" alt="Imagem do produto" width="353px" height="353px">
+            <h3>{{ product.name }}</h3>
+            <p><span>R$</span>{{ product.price | number:'2.2-2':'pt'}}</p> 
+        </div>
+        <div class="right">
+            <h4>Descrição do produto</h4>
+            <p>{{ product.description }}</p>
+        </div>
+    </div>
+</section>

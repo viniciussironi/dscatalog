@@ -15,7 +15,6 @@ import com.vinicius.dscatalog.services.CategoryService;
 
 @RestController
 @RequestMapping(value = "/categories")
-@CrossOrigin("http://localhost:4200/catalog")
 public class CategoryResource {
 	
 	@Autowired
@@ -27,7 +26,6 @@ public class CategoryResource {
 	}
 	
 	@GetMapping(value = "/{id}")
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
 	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.findById(id));
 	}

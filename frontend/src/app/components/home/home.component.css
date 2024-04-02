@@ -4,10 +4,13 @@
     background-color: #FFFFFF;
     margin: 0 auto;
     margin-top: 50px;
-    border-radius: 25px;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 
+    0 5px  10px 0 rgba(0, 0, 0, 0.2), 
+    0 10px 25px 0 rgba(0, 0, 0, 0.19);
 }
 
 .app-home div {
@@ -29,9 +32,13 @@
     font-size: 24px;
     color: #9E9E9E;
     margin-top: 20px;
-    margin-bottom: 165px;
 }
 
 a {
     text-decoration: none;
+}
+
+app-button-principal {
+    position: relative;
+    top: 165px;
 }
