@@ -10,7 +10,7 @@
             <div>
                 <input type="email" placeholder="Email" [formControl]="username">
                 <input type="password" placeholder="Senha" [formControl]="password">
-                <a href="login/recover/identy">Esqueceu a senha?</a>
+                <a routerLink="/recover/identy">Esqueceu a senha?</a>
             </div>
         </form>
         <app-button-principal btn-text="LOGAR" (click)="getLogin()"></app-button-principal>

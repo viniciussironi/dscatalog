@@ -13,6 +13,7 @@ import { InputEmailComponent } from './components/login/recover/input-email/inpu
 import { MessageComponent } from './components/login/recover/message/message.component';
 import { FormNewPasswordComponent } from './components/login/recover/form-new-password/form-new-password.component';
 import { RegisterComponent } from './components/login/register/register.component';
+import { RecoverComponent } from './components/login/recover/recover.component'; 
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -27,10 +28,12 @@ export const routes: Routes = [
         {path: 'user', component: UserCrudComponent},
         ]
     },
-    {path: 'login', component: LoginComponent, children: [
+    {path: 'login', component: LoginComponent},
+    {path: 'recover', component: RecoverComponent, 
+     children: [
         {path: 'identy', component: InputEmailComponent},
         {path: 'message', component: MessageComponent},
-        {path: 'form', component: FormNewPasswordComponent},
+        {path: 'new-password', component: FormNewPasswordComponent},
         ]
     },
     {path: 'cadastrar', component: RegisterComponent},

@@ -45,4 +45,12 @@ export class LoginService {
 
     return true;
   }
+
+  getRecoverToken(username: string) {
+    const body = {
+      email: username
+    }
+    
+    return this.http.post(AppConstants.urlBackEnd + 'auth/recover-token', body).subscribe()
+  }
 }
