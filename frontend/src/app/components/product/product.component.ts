@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { ProductInterface } from '../../interfaces/products';
 import { DecimalPipe } from '@angular/common';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-product',

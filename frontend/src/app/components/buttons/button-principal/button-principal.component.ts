@@ -7,12 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './button-principal.component.html',
   styleUrl: './button-principal.component.css'
 })
+
 export class ButtonPrincipalComponent {
   @Input("btn-text") btnText: string = "";
-  @Input() disabled: boolean = false;
-  @Output("submit") onSubmit = new EventEmitter();
-
-  submit() {
-    this.onSubmit.emit();
-  }
 }

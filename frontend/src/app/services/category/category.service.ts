@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { CategoryInterface } from '../../interfaces/category';
 import { Observable } from 'rxjs';
 import { Page } from '../../interfaces/page';
-import { app } from '../../../../server';
 import { AppConstants } from '../../app-constants';
 
 @Injectable({

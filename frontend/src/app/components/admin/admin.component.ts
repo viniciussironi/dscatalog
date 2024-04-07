@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { UserCrudComponent } from './user-crud/user-crud.component';
 import { CategoryCrudComponent } from './category-crud/category-crud.component';

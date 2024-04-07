@@ -7,7 +7,7 @@
         </div>
         <select name="categoria" [formControl]="categoryId" (change)="onSubmit($event)"> 
             <option value="">Categorias</option>
-            <option *ngFor="let category of categories.content" value="{{category.id}}">{{category.name}}</option>
+            <option *ngFor="let category of categories.content" value="{{ category.id }}">{{ category.name }}</option>
         </select> 
         <input type="reset" value="LIMPAR FILTRO" (click)="resetFilters()"> 
     </form>
@@ -19,11 +19,11 @@
         </a> 
     </div>
     <div class="pages"> 
-        <span (click)="voltarPagina()" class="material-symbols-outlined" [ngClass]="{'active': products.number > 0}">arrow_back_ios</span>
+        <span (click)="backPage()" class="material-symbols-outlined" [ngClass]="{'active': products.number > 0}">arrow_back_ios</span>
         <button *ngFor="let page of [].constructor(products.totalPages); let i = index" 
         (click)="getProducts(i, productName.value + '', categoryId.value + ''); selectPage(i)"
         [ngClass]="{'selected': selectedPage === i}">{{ i + 1 }}</button>
-        <span (click)="avancarPagina()" class="material-symbols-outlined" [ngClass]="{'active': products.number < products.totalPages - 1}">arrow_forward_ios</span>
+        <span (click)="nextPage()" class="material-symbols-outlined" [ngClass]="{'active': products.number < products.totalPages - 1}">arrow_forward_ios</span>
     </div>    
 </section>
 

@@ -19,31 +19,32 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 export class CatalogComponent implements OnInit {
   products: Page<ProductInterface> = { content: [], totalPages: 0, number: 0 };
   categories: Page<CategoryInterface> = { content: [], totalPages: 0, number: 0 };
-  productName = new FormControl('');
+  
+  productName = new FormControl();
   categoryId = new FormControl('');
   selectedPage!: number;
   
   constructor(private productService: ProductService, private categoryService: CategoryService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.getProducts(0, "", "");
+    this.getProducts(0, '', '');
     this.getCategories();
     this.selectPage(0);
   }
 
   onSubmit(event: Event) {
     event.preventDefault();
-    this.getProducts(0, this.productName.value + '', this.categoryId.value + '');
+    this.getProducts(0, this.productName.value, String(this.categoryId.value));
   }
 
   resetFilters() {
     this.productName.setValue('');
     this.categoryId.setValue('');
-    this.getProducts(0, "", "");
+    this.getProducts(0, '', '');
   }
 
   getProducts(pageNumber: number, productName: string, categoryId: string) {
-      this.productService.getProducts(pageNumber + "", productName, categoryId + "").subscribe(
+      this.productService.getProducts(String(pageNumber), productName, categoryId).subscribe(
       (products: Page<ProductInterface>) => {
       this.products = products;
     });
@@ -57,19 +58,19 @@ export class CatalogComponent implements OnInit {
     });
   }
 
-  avancarPagina() {
+  nextPage() {
     if (this.products.number < this.products.totalPages - 1) {
       this.products.number++;
       this.selectedPage = this.products.number;
-      this.getProducts(this.products.number, this.productName.value + '', this.categoryId.value + '');
+      this.getProducts(this.products.number, this.productName.value, String(this.categoryId.value));
     }
   }
 
-  voltarPagina() {
+  backPage() {
     if (this.products.number > 0) {
       this.products.number --;
       this.selectedPage = this.products.number;
-      this.getProducts(this.products.number, this.productName.value + '', this.categoryId.value + '');
+      this.getProducts(this.products.number, this.productName.value, String(this.categoryId.value));
     }
   }
 

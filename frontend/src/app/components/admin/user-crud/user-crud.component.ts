@@ -12,10 +12,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class UserCrudComponent {
   
-  firstName = new FormControl();
-  lastName = new FormControl();
-  email = new FormControl();
-  password = new FormControl();
+  firstName = new FormControl;
+  lastName = new FormControl;
+  email = new FormControl;
+  password = new FormControl;
 
   constructor(private userService: UserService) { }
 

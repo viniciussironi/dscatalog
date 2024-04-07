@@ -20,10 +20,10 @@ import { HttpParams } from '@angular/common/http';
 export class ProductCrudComponent implements OnInit {
   categories: Page<CategoryInterface> = { content: [], totalPages: 0, number: 0 };
   
-  productName = new FormControl();
-  productPrice = new FormControl();
-  categoryId = new FormControl();
-  productDescription = new FormControl();
+  productName = new FormControl;
+  productPrice = new FormControl;
+  categoryId = new FormControl('');
+  productDescription = new FormControl;
 
   constructor(private categoryService: CategoryService, private productService: ProductService) { }
 

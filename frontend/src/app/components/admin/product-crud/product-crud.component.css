@@ -11,7 +11,7 @@ form {
 
 .form {
     display: flex;
-    margin: 40px 0;
+    margin: 39px 0;
 }
 
 .left input, .left select, .right textarea {
@@ -40,6 +40,7 @@ textarea {
     width: 408px;
     height: 428px;
     padding: 10px 20px;
+    resize: none;
 }
 
 

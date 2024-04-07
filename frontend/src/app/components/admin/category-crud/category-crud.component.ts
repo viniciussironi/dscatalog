@@ -12,7 +12,7 @@ import { CategoryService } from '../../../services/category/category.service';
 })
 export class CategoryCrudComponent {
 
-  categoryName = new FormControl();
+  categoryName = new FormControl;
 
   constructor(private categoryService: CategoryService) { }
 

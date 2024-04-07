@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ButtonPrincipalComponent } from '../buttons/button-principal/button-principal.component';
 import { LoginService } from '../../services/login/login.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { LoginInterface } from '../../interfaces/login';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +18,11 @@ export class LoginComponent {
   username = new FormControl;
   password = new FormControl;
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   getLogin() {
     this.loginService.getLogin(this.username.value, this.password.value)
+    console.log(localStorage.getItem('access_token'))
+    this.router.navigate(['./admin/product']);
   }
 }

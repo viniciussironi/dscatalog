@@ -4,7 +4,7 @@
         <form (submit)="onSubmit($event)">
             <input type="text" placeholder="Nome" [formControl]="categoryName">
             <div>
-                <app-buttons-crud (click)="onSubmit($event)"></app-buttons-crud>
+                <app-buttons-crud (submit)="insertCategory()"></app-buttons-crud>
             </div>
         </form> 
     </div>

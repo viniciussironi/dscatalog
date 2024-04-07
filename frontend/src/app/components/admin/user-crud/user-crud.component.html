@@ -8,7 +8,7 @@
             <input type="password" placeholder="Senha" [formControl]="password">
             <input type="password" placeholder="Repita a senha">
             <div>
-                <app-buttons-crud (click)="onSubmit($event)"></app-buttons-crud>
+                <app-buttons-crud (submit)="insertUser()"></app-buttons-crud>
             </div>
         </form> 
     </div>

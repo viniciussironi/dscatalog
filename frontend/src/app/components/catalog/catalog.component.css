@@ -22,6 +22,11 @@ form {
     0 5px  10px 0 rgba(0, 0, 0, 0.2), 
     0 10px 25px 0 rgba(0, 0, 0, 0.19);
 }
+
+input:focus {
+    outline: none;
+}
+
 form input, form select {
     height: 28px;
     font-size: 18px;
@@ -45,11 +50,16 @@ form button {
     top: 3px;
 }
 
+form button span:hover {
+    color: #000;
+}
+
 form select {
     width: 297px;
     border: none;
     border-bottom: 1px solid #E1E1E1;
 }
+
 form input[type = reset] {
     width: 218px;
     height: 38px;
@@ -59,6 +69,11 @@ form input[type = reset] {
     border: 1px solid #E1E1E1;
     background-color: #fff;
     cursor: pointer;
+}
+
+form input[type = reset]:active {
+    color: #000;
+    border-color: #000;
 }
 
 .produtos {
