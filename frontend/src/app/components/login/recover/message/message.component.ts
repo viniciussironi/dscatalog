@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonRecoverComponent } from '../../../buttons/button-recover/button-recover.component';
+import { InputEmailComponent } from '../input-email/input-email.component';
 
 @Component({
   selector: 'app-message',
@@ -9,5 +10,6 @@ import { ButtonRecoverComponent } from '../../../buttons/button-recover/button-r
   styleUrl: './message.component.css'
 })
 export class MessageComponent {
-
+  public email: string = '';
 }
+

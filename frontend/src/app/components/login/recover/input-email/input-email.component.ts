@@ -3,6 +3,7 @@ import { ButtonRecoverComponent } from '../../../buttons/button-recover/button-r
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../../../../services/login/login.service';
 import { Router } from '@angular/router';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-input-email',
@@ -18,6 +19,10 @@ export class InputEmailComponent {
 
   getRecoverToken() {
     this.loginService.getRecoverToken(this.username.value);
-    //this.router.navigate(['./recover/message']);
+    this.router.navigate(['./recover/message']);
+  }
+
+  public getUsername() {
+    return this.username.value
   }
 }
