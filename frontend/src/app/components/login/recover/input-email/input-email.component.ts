@@ -18,11 +18,12 @@ export class InputEmailComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
   getRecoverToken() {
-    this.loginService.getRecoverToken(this.username.value);
-    this.router.navigate(['./recover/message']);
-  }
-
-  public getUsername() {
-    return this.username.value
+    if(this.username.value === '') {
+      console.log('Vazio')
+    }
+    else {
+      this.loginService.getRecoverToken(this.username.value);
+      this.router.navigate(['./recover/message']);
+    }
   }
 }

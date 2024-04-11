@@ -8,10 +8,11 @@
         <h2>LOGIN</h2>
         <form class="login">
             <div>
-                <input type="email" placeholder="Email" [formControl]="username">
-                <input type="password" placeholder="Senha" [formControl]="password">
-                <a routerLink="/recover/identy">Esqueceu a senha?</a>
+                <input type="email" placeholder="Email" [formControl]="username" required="true"> 
+                <input type="password" placeholder="Senha" [formControl]="password" required="true">
             </div>
+            <span class="error">{{ errorMessage }}</span>
+            <a routerLink="/recover/identy">Esqueceu a senha?</a>
         </form>
         <app-button-principal btn-text="LOGAR" (click)="getLogin()"></app-button-principal>
         <p>Não tem cadastro? <a href="/cadastrar">CADASTRAR</a></p>

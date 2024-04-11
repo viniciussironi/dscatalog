@@ -18,10 +18,19 @@ export class LoginComponent {
   username = new FormControl;
   password = new FormControl;
 
+  errorMessage: string = '';
+
   constructor(private loginService: LoginService, private router: Router) {}
 
   getLogin() {
-    this.loginService.getLogin(this.username.value, this.password.value)
-    this.router.navigate(['./admin/product']);
+    this.loginService.getLogin(this.username.value, this.password.value).subscribe((response: any) => {
+      localStorage.setItem('access_token', response.access_token);
+      localStorage.setItem('expires_in', response.expires_in);
+      localStorage.setItem('issued_at', Date.now().toString());
+      this.router.navigate(['./admin/product']);
+    },
+      (error: any) => {
+      this.errorMessage = error.error.error
+    }); 
   }
 }

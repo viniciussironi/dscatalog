@@ -30,21 +30,15 @@ export class ProductCrudComponent implements OnInit {
   ngOnInit() {
     this.getCategories();
   }
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    this.insertProduct();
-  }
   
   getCategories() {
     this.categoryService.getCategories().subscribe(
       (categories: Page<CategoryInterface>) => {
         this.categories = categories;
       });
-    }
+  }
     
-    insertProduct() {
-    console.log(this.productName.value, this.productPrice.value, this.categoryId.value, this.productDescription.value)
+  insertProduct() {
     const product = {
       name: this.productName.value,
       price: this.productPrice.value,

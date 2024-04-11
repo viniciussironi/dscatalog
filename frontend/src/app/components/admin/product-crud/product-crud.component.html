@@ -1,7 +1,7 @@
 <section class="app-product-crud">
     <h2>DADOS DO PRODUTO</h2>
     <div class="inputs">
-        <form (submit)="onSubmit($event)">
+        <form>
             <div class="form">
                 <div class="left">
                     <input type="text" placeholder="Nome do produto" [formControl]="productName" required>
@@ -9,7 +9,7 @@
                         <option value="">Categorias</option>
                         <option *ngFor="let category of categories.content" value="{{ category.id }}">{{ category.name }}</option>
                     </select> 
-                    <input type="number" placeholder="Preço" [formControl]="productPrice" required>
+                    <input type="text" placeholder="Preço" [formControl]="productPrice" required>
                     <input type="file" id="real-file" hidden="hidden" required/>
                     <button id="custom-button">ADICIONAR IMAGEM</button>
                     <p id="custom-text">As imagens devem ser  JPG ou PNG e não devem ultrapassar <span>5 mb.</span></p>
@@ -18,7 +18,7 @@
                     <textarea [formControl]="productDescription" placeholder="Descrição" required></textarea>
                 </div>
             </div>
-            <app-buttons-crud (submit)="insertProduct()"></app-buttons-crud>
+            <app-buttons-crud (click)="insertProduct()"></app-buttons-crud>
         </form>
     </div>
 </section>

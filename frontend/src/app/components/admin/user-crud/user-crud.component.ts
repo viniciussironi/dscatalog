@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ButtonsCrudComponent } from '../../buttons/buttons-crud/buttons-crud.component';
 import { UserService } from '../../../services/user/user.service';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-crud',
@@ -12,18 +12,17 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class UserCrudComponent {
   
-  firstName = new FormControl;
-  lastName = new FormControl;
-  email = new FormControl;
-  password = new FormControl;
+  firstName = new FormControl('', [Validators.required])
+  lastName = new FormControl('', [Validators.required])
+  email = new FormControl('', [Validators.required, Validators.email])
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
   constructor(private userService: UserService) { }
 
   onSubmit(event: Event) {
-    event.preventDefault();
+    event.preventDefault(); 
     this.insertUser();
   }
-
 
   insertUser() {
     const user = {

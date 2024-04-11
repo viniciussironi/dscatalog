@@ -1,10 +1,12 @@
 <section class="app-category-crud">
     <h2>DADOS DA CATEGORIA</h2>
     <div class="inputs">
-        <form (submit)="onSubmit($event)">
-            <input type="text" placeholder="Nome" [formControl]="categoryName">
+        <form>
+            <span *ngIf="categoryName.hasError('required')">Campo requirido!</span>
+            <span *ngIf="categoryName.hasError('nullValidator')">Campo Vazio!</span>
+            <input type="text" [formControl]="categoryName" placeholder="Nome">
             <div>
-                <app-buttons-crud (submit)="insertCategory()"></app-buttons-crud>
+                <app-buttons-crud (click)="insertCategory()"></app-buttons-crud>
             </div>
         </form> 
     </div>

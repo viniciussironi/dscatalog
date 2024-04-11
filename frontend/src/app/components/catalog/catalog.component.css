@@ -58,6 +58,7 @@ form select {
     width: 297px;
     border: none;
     border-bottom: 1px solid #E1E1E1;
+    background-color: #fff;
 }
 
 form input[type = reset] {

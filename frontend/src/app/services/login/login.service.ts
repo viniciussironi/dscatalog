@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConstants } from '../../app-constants';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,7 @@ export class LoginService {
       'Authorization': 'Basic ' + btoa('myclientid:myclientsecret')
     })
   
-    return this.http.post(AppConstants.urlBackEnd + this.oauth, body, { headers }).subscribe((response: any) => {
-        localStorage.setItem('access_token', response.access_token);
-        localStorage.setItem('expires_in', response.expires_in);
-        localStorage.setItem('issued_at', Date.now().toString());
-      }); 
+    return this.http.post(AppConstants.urlBackEnd + this.oauth, body, { headers });
   }
 
   isLoggedIn(): boolean {
@@ -50,7 +47,6 @@ export class LoginService {
     const body = {
       email: username
     }
-    
     return this.http.post(AppConstants.urlBackEnd + 'auth/recover-token', body).subscribe()
   }
 }

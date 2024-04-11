@@ -8,7 +8,7 @@ public class NewPasswordDTO {
 	@NotBlank(message = "Campo Obrigatório")
 	private String token;
 	@NotBlank(message = "Campo Obrigatório")
-	@Size(min = 8, message = "Deve ter no mínimo 8 caracteres")
+	@Size(min = 6, message = "Deve ter no mínimo 6 caracteres")
 	private String password;
 	
 	public NewPasswordDTO() {
