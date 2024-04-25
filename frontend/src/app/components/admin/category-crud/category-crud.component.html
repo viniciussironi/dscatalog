@@ -2,12 +2,16 @@
     <h2>DADOS DA CATEGORIA</h2>
     <div class="inputs">
         <form>
-            <span *ngIf="categoryName.hasError('required')">Campo requirido!</span>
-            <span *ngIf="categoryName.hasError('nullValidator')">Campo Vazio!</span>
-            <input type="text" [formControl]="categoryName" placeholder="Nome">
-            <div>
-                <app-buttons-crud (click)="insertCategory()"></app-buttons-crud>
-            </div>
-        </form> 
+          <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput [formControl]="categoryName" type="text">
+            @if (categoryName.hasError('required')) {
+              <mat-error>Compo <strong>obrigatório</strong></mat-error>
+            }
+          </mat-form-field>
+        </form>
+        <div>
+          <app-buttons-crud></app-buttons-crud>
+        </div>
     </div>
 </section>

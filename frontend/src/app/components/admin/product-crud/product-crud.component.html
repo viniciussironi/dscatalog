@@ -1,24 +1,57 @@
 <section class="app-product-crud">
-    <h2>DADOS DO PRODUTO</h2>
-    <div class="inputs">
-        <form>
-            <div class="form">
-                <div class="left">
-                    <input type="text" placeholder="Nome do produto" [formControl]="productName" required>
-                    <select name="categoria" [formControl]="categoryId"> 
-                        <option value="">Categorias</option>
-                        <option *ngFor="let category of categories.content" value="{{ category.id }}">{{ category.name }}</option>
-                    </select> 
-                    <input type="text" placeholder="Preço" [formControl]="productPrice" required>
-                    <input type="file" id="real-file" hidden="hidden" required/>
-                    <button id="custom-button">ADICIONAR IMAGEM</button>
-                    <p id="custom-text">As imagens devem ser  JPG ou PNG e não devem ultrapassar <span>5 mb.</span></p>
-                </div>
-                <div class="right">
-                    <textarea [formControl]="productDescription" placeholder="Descrição" required></textarea>
-                </div>
-            </div>
-            <app-buttons-crud (click)="insertProduct()"></app-buttons-crud>
-        </form>
-    </div>
+  <h2>DADOS DO PRODUTO</h2>
+  <div class="inputs">
+    <form>
+      <div class="left">
+
+        <mat-form-field class="product-name">
+          <mat-label>Nome</mat-label>
+          <input matInput [formControl]="productName" type="text" [errorStateMatcher]="matcher">
+          <mat-hint>Errors appear instantly!</mat-hint>
+          @if (productName.hasError('required')) {
+            <mat-error>Compo <strong>obrigatório</strong></mat-error>
+          }
+          @if (productName.hasError('minLength') || productName.hasError('maxLength')) {
+            <mat-error>Deve ter entre 5 e 60 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="product-category">
+          <mat-label>Categorias</mat-label>
+          <mat-select matInput [formControl]="categoryId">
+            <mat-option *ngFor="let category of categories.content" value="{{ category.id }}">{{ category.name }}</mat-option>
+          </mat-select>
+          @if (categoryId.hasError('required')) {
+            <mat-error>Compo <strong>obrigatório</strong></mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="product-price">
+          <mat-label>Preço</mat-label>
+          <input type="text" matInput [formControl]="productPrice" required>
+          @if (productPrice.hasError('required')) {
+            <mat-error>Compo <strong>obrigatório</strong></mat-error>
+          }
+        </mat-form-field>
+
+        <input type="file" id="real-file" hidden="hidden" required/>
+        <button id="custom-button">ADICIONAR IMAGEM</button>
+        <p id="custom-text">As imagens devem ser  JPG ou PNG e não devem ultrapassar <span>5 mb.</span></p>
+
+      </div>
+
+      <div class="right">
+
+        <mat-form-field class="product-description">
+          <mat-label>Descrição</mat-label>
+          <textarea matInput [formControl]="productDescription"></textarea>
+          @if (productDescription.hasError('required')) {
+            <mat-error>Compo <strong>obrigatório</strong></mat-error>
+          }
+        </mat-form-field>
+
+      </div>
+    </form>
+  </div>
+  <app-buttons-crud (click)="insertProduct()"></app-buttons-crud>
 </section>

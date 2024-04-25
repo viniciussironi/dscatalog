@@ -1,27 +1,39 @@
-import { Component } from '@angular/core';
-import { ButtonsCrudComponent } from '../../buttons/buttons-crud/buttons-crud.component';
-import { AbstractControl, FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { CategoryService } from '../../../services/category/category.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ButtonsCrudComponent } from '../../buttons/buttons-crud/buttons-crud.component';
+import { CategoryService } from '../../../services/category/category.service';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-category-crud',
   standalone: true,
-  imports: [ButtonsCrudComponent, ReactiveFormsModule, CommonModule],
+  imports: [
+    ButtonsCrudComponent,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule
+  ],
+
   templateUrl: './category-crud.component.html',
   styleUrl: './category-crud.component.css'
 })
-export class CategoryCrudComponent {
+export class CategoryCrudComponent implements OnInit {
 
-  categoryName = new FormControl('', [Validators.required, Validators.email]);
+  categoryName = new FormControl('', [Validators.required]);
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService,
+    private formBuilder: NonNullableFormBuilder) { }
+
+  ngOnInit(): void {
+
+  }
 
   insertCategory() {
-    const product = {
-      name: this.categoryName.value,
-    };
-    
-    this.categoryService.insertCategory(product).subscribe();
+
+   // this.categoryService.insertCategory().subscribe();
   }
 }
