@@ -1,4 +1,4 @@
-import { ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -13,14 +13,14 @@ import { InputEmailComponent } from './components/login/recover/input-email/inpu
 import { MessageComponent } from './components/login/recover/message/message.component';
 import { FormNewPasswordComponent } from './components/login/recover/form-new-password/form-new-password.component';
 import { RegisterComponent } from './components/login/register/register.component';
-import { RecoverComponent } from './components/login/recover/recover.component'; 
+import { RecoverComponent } from './components/login/recover/recover.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
-    {path: 'product', component: CatalogComponent},
-    {path: 'product/:id', component: ProductComponent},
-    {path: 'admin', 
-     component: AdminComponent, 
+    {path: 'products', component: CatalogComponent},
+    {path: 'products/:id', component: ProductComponent},
+    {path: 'admin',
+     component: AdminComponent,
      canActivate: [ canActivateAdmin ],
      children: [
         {path: 'product', component: ProductCrudComponent},
@@ -29,7 +29,7 @@ export const routes: Routes = [
         ]
     },
     {path: 'login', component: LoginComponent},
-    {path: 'recover', component: RecoverComponent, 
+    {path: 'recover', component: RecoverComponent,
      children: [
         {path: 'identy', component: InputEmailComponent},
         {path: 'message', component: MessageComponent},

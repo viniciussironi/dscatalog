@@ -1,15 +1,48 @@
 <section class="app-user-crud">
-    <h2>DADOS DO USUÁRIO</h2>
-    <div class="inputs">
-        <form (submit)="onSubmit($event)">
-            <input type="text" placeholder="Nome" [formControl]="firstName">
-            <input type="text" placeholder="Sobrenome" [formControl]="lastName">
-            <input type="email" placeholder="Email" [formControl]="email">
-            <input type="password" placeholder="Senha" [formControl]="password">
-            <input type="password" placeholder="Repita a senha">
-            <div>
-                <app-buttons-crud (submit)="insertUser()"></app-buttons-crud>
-            </div>
-        </form> 
-    </div>
+  <h2>DADOS DO USUÁRIO</h2>
+    <form>
+      <mat-form-field class="user-name">
+        <mat-label>Nome</mat-label>
+        <input matInput [formControl]="firstName" type="text">
+        @if (firstName.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="user-lastname">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput [formControl]="lastName" type="text">
+        @if (lastName.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="user-email">
+        <mat-label>Email</mat-label>
+        <input matInput [formControl]="email" type="email">
+        @if (email.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+        @if (email.hasError('email')) {
+          <mat-error>Digite um e-mail válido</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="user-password">
+        <mat-label>Senha</mat-label>
+        <input matInput [formControl]="password1" type="password">
+        @if (password1.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="user-password">
+        <mat-label>Repita a senha</mat-label>
+        <input matInput [formControl]="password2" type="password">
+        @if (password2.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+    </form>
+    <app-buttons-crud (click)="insertUser()"></app-buttons-crud>
 </section>

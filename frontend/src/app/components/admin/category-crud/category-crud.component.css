@@ -6,8 +6,8 @@ form {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: 40px 0;
 }
+
 
 input {
     border: 1px solid #E1E1E1;

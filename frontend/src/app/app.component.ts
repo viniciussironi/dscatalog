@@ -10,15 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet, 
-    HeaderComponent, 
-    HomeComponent, 
-    CatalogComponent, 
-    AdminComponent, 
+    RouterOutlet,
+    HeaderComponent,
+    HomeComponent,
+    CatalogComponent,
+    AdminComponent,
     HttpClientModule,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'catalog';

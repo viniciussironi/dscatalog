@@ -1,6 +1,6 @@
 .app-home section {
-    width: 1360px;
-    height: 780px;
+    width: 70vw;
+    height: 80vh;
     background-color: #FFFFFF;
     margin: 0 auto;
     margin-top: 50px;
@@ -8,8 +8,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 
-    0 5px  10px 0 rgba(0, 0, 0, 0.2), 
+    box-shadow:
+    0 5px  10px 0 rgba(0, 0, 0, 0.2),
     0 10px 25px 0 rgba(0, 0, 0, 0.19);
 }
 

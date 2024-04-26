@@ -8,7 +8,14 @@ import { ButtonsCrudComponent } from '../buttons/buttons-crud/buttons-crud.compo
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [RouterOutlet, UserCrudComponent, CategoryCrudComponent, ProductCrudComponent, RouterLink, ButtonsCrudComponent],
+  imports: [
+    RouterOutlet,
+    UserCrudComponent,
+    CategoryCrudComponent,
+    ProductCrudComponent,
+    RouterLink,
+    ButtonsCrudComponent,
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })

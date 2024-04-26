@@ -7,7 +7,6 @@
         <mat-form-field class="product-name">
           <mat-label>Nome</mat-label>
           <input matInput [formControl]="productName" type="text" [errorStateMatcher]="matcher">
-          <mat-hint>Errors appear instantly!</mat-hint>
           @if (productName.hasError('required')) {
             <mat-error>Compo <strong>obrigatório</strong></mat-error>
           }
@@ -28,13 +27,13 @@
 
         <mat-form-field class="product-price">
           <mat-label>Preço</mat-label>
-          <input type="text" matInput [formControl]="productPrice" required>
+          <input type="text" matInput [formControl]="productPrice">
           @if (productPrice.hasError('required')) {
             <mat-error>Compo <strong>obrigatório</strong></mat-error>
           }
         </mat-form-field>
 
-        <input type="file" id="real-file" hidden="hidden" required/>
+        <input type="file" id="real-file" hidden="hidden"/>
         <button id="custom-button">ADICIONAR IMAGEM</button>
         <p id="custom-text">As imagens devem ser  JPG ou PNG e não devem ultrapassar <span>5 mb.</span></p>
 
