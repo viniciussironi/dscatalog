@@ -28,8 +28,7 @@ public class ProductResource {
 			@RequestParam(name = "name", defaultValue = "") String name,
 			@RequestParam(name = "categoryId", defaultValue = "0") String categoryId,
 			Pageable pageable) {
-		PageRequest request = PageRequest.of(pageable.getPageNumber(), 8);
-		return ResponseEntity.ok().body(service.searchAllByNameOrCategoryId(name, categoryId, request));
+		return ResponseEntity.ok().body(service.searchAllByNameOrCategoryId(name, categoryId, pageable));
 	}
 
 	@GetMapping(value = "/{id}")

@@ -1,0 +1,27 @@
+@use '../../../../variables'
+
+.buttons
+  display: flex
+  justify-content: flex-end
+
+button
+  height: 60px
+  width: 273px
+  border-radius: 10px
+  margin-left: 40px
+  font-weight: bold
+  font-size: 16px
+  cursor: pointer
+
+#cancel
+  border: 1px solid #DF5753
+  color: #DF5753
+  background-color: variables.$secundary-bg-color
+
+#save
+  border: 1px solid variables.$primary-color
+  color: variables.$secundary-bg-color
+  background-color: variables.$primary-color
+
+button:hover
+  opacity: 0.7

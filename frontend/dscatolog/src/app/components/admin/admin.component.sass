@@ -1,0 +1,29 @@
+@use '../../../variables'
+
+.app-admin
+  display: flex
+
+nav
+  background-color: variables.$secundary-bg-color
+  height: 93vh
+  width: 300px
+  box-shadow: variables.$box-shadow
+
+nav ul
+  display: flex
+  flex-direction: column
+
+nav ul a
+  font-size: 18px
+  text-decoration: none
+  font-weight: bold
+  color: variables.$paragraph-color
+  padding: 20px 50px 20px 20px
+  border-bottom: variables.$border
+
+nav ul a:hover
+  color: variables.$primary-color
+  background-color: #407BFF4D
+
+div
+  margin: 0px auto

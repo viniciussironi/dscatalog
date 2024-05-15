@@ -1,0 +1,33 @@
+@use '../../../../../variables'
+
+.app-add-product
+  position: relative
+  background-color: variables.$secundary-bg-color
+  box-shadow: variables.$box-shadow
+  border-radius: 20px
+  padding: 50px
+  width: 1055px
+  height: 780px
+  margin-top: 50px
+
+.inputs form
+  margin-top: 40px
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+
+.left, .right
+  display: flex
+  flex-direction: column
+
+mat-form-field
+  margin-bottom: 10px
+  width: 454px
+
+.product-description, .product-description textarea
+  height: 450px
+
+app-buttons-admin
+  position: absolute
+  right: 50px
+  bottom: 50px

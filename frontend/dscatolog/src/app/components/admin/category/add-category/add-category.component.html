@@ -1,0 +1,16 @@
+<section class="app-add-user">
+  <h2>DADOS DA CATEGORIA</h2>
+  <div class="inputs">
+    <form>
+      <mat-form-field class="category-name">
+        <mat-label>Nome</mat-label>
+        <input matInput [formControl]="categoryName" type="text">
+        @if (categoryName.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </div>
+  <app-buttons-admin (click)="insertCategory()"></app-buttons-admin>
+</section>
+<p>add-category works!</p>

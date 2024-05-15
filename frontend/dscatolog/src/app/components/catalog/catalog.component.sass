@@ -1,0 +1,146 @@
+@use '../../../variables'
+
+.app-catalog
+  width: 1082px
+  margin: 0 auto
+
+.app-catalog h2
+  font-size: 24px
+  color: variables.$text-color
+  margin: 10px 0
+
+form
+  width: 1082px
+  height: 60px
+  background-color: variables.$secundary-bg-color
+  margin-bottom: 20px
+  display: flex
+  align-items: center
+  justify-content: space-around
+  box-shadow: variables.$box-shadow
+  border-radius: 10px
+
+input:focus
+  outline: none
+
+form input, form select
+  height: 28px
+  font-size: 18px
+  color: variables.$paragraph-color
+
+form input[type = text]
+  width: 430px
+  padding: 0
+  border: none
+  border-bottom: variables.$border
+
+form button
+  background-color: variables.$secundary-bg-color
+  color: variables.$paragraph-color
+  border: none
+  cursor: pointer
+  position: relative
+  left: -25px
+  top: 3px
+
+form button span:hover
+  color: #000
+
+form select
+  width: 297px
+  border: none
+  border-bottom: variables.$border
+  background-color: variables.$secundary-bg-color
+
+form input[type = reset]
+  width: 218px
+  height: 38px
+  border-radius: 8px
+  font-size: 14px
+  font-weight: 700
+  border: variables.$border
+  background-color: variables.$secundary-bg-color
+  cursor: pointer
+
+form input[type = reset]:active
+  color: #000
+  border-color: #000
+
+.produtos
+  flex: 1 1 0%
+  display: flex
+  -webkit-box-pack: start
+  justify-content: flex-start
+  flex-wrap: wrap
+  gap: 30px
+  width: 1082px
+  height: 662px
+
+.produto
+  border-radius: 13px
+  background-color: variables.$secundary-bg-color
+  width: 248px
+  height: 316px
+  text-align: center
+  cursor: pointer
+  text-decoration: none
+  box-shadow: variables.$box-shadow
+
+.produto:hover
+  opacity: 0.8
+
+.produto img
+  width: 165px
+  height: 165px
+  margin: 10px
+
+.produto h3
+  font-size: 18px
+  border-top: variables.$border
+  padding-top: 15px
+  color: variables.$text-color
+
+.produto p
+  margin: 15px
+  font-size: 32px
+  font-weight: 700
+  color: variables.$primary-color
+
+.produto span
+  font-size: 18px
+  font-weight: 400
+  color: #9E9E9E
+  position: relative
+  top: -9px
+  left: -5px
+
+.pages
+  margin-top: 30px
+  display: flex
+  justify-content: center
+  align-items: center
+
+.pages button
+  margin: 0 10px
+  background-color: #E1E1E1
+  color: variables.$secundary-bg-color
+  border: none
+  font-size: 18px
+  height: 40px
+  width: 40px
+  border-radius: 50%
+  cursor: pointer
+
+.pages button:hover
+  background-color: variables.$primary-color
+
+.pages button.selected
+  background-color: variables.$primary-color
+
+.pages span
+  font-size: 26px
+  cursor: pointer
+  color: variables.$paragraph-color
+
+.pages span:hover, .pages span.active
+  color: variables.$primary-color

@@ -1,0 +1,118 @@
+@use '../../../../variables'
+
+.top
+  margin: 20px 0
+  display: flex
+  flex-direction: row
+  gap: 20px
+  justify-content: space-between
+  align-items: center
+
+h1
+  font-size: 25px
+
+.btn-add
+  font-weight: 700
+  background-color: variables.$primary-color
+  color: variables.$secundary-bg-color
+  border: none
+  width: 170px
+  height: 60px
+  border-radius: 10px
+  cursor: pointer
+  font-size: 16px
+  box-shadow: variables.$box-shadow
+
+.btn-add:hover
+  opacity: 0.8
+
+.categories
+  display: flex
+  flex-direction: column
+  gap: 20px
+
+
+.category
+  width: 1052px
+  height: 80px
+  display: flex
+  flex-direction: row
+  border-radius: 13px
+  cursor: pointer
+  text-decoration: none
+  background-color: variables.$secundary-bg-color
+  box-shadow: variables.$box-shadow
+
+.intern
+  display: flex
+  justify-content: space-between
+  width: 1052px
+
+.left
+  padding: 30px 35px
+
+.left h2
+  font-size: 18px
+
+.right
+  position: relative
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  gap: 20px
+  padding: 0px 30px
+
+.right button
+  width: 213px
+  height: 38px
+  border-radius: 10px
+  font-weight: 700
+  background-color: variables.$secundary-bg-color
+  cursor: pointer
+
+.right button:hover
+  opacity: 0.7
+
+#edit
+  color: variables.$paragraph-color
+  border: 1px solid variables.$paragraph-color
+
+#delete
+  color: #DF5753
+  border: 1px solid #DF5753
+
+.pages
+  position: fixed
+  top: 91vh
+  width: 1000px
+
+.pages div
+  display: flex
+  justify-content: center
+  align-items: center
+
+.pages button
+  margin: 0 10px
+  background-color: #E1E1E1
+  color: variables.$secundary-bg-color
+  border: none
+  font-size: 18px
+  height: 40px
+  width: 40px
+  border-radius: 50%
+  cursor: pointer
+
+.pages button:hover
+  background-color: variables.$primary-color
+
+.pages button.selected
+  background-color: variables.$primary-color
+
+.pages span
+  font-size: 26px
+  cursor: pointer
+  color: variables.$paragraph-color
+
+.pages span:hover, .pages span.active
+  color: variables.$primary-color

@@ -1,0 +1,31 @@
+<section class="app-category-crud">
+
+  <div class="top">
+    <h1>Categorias</h1>
+    <a href="/admin/add-category">
+      <button class="btn-add">ADICIONAR</button>
+    </a>
+  </div>
+  <div class="categories">
+    <div class="category" *ngFor="let category of categories.content">
+      <div class="intern">
+        <div class="left">
+          <h2>{{ category.name }}</h2>
+        </div>
+        <div class="right">
+          <button id="edit">EDITAR</button>
+          <button id="delete" (click)="deleteCategory(category.id)">EXCLUIR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pages">
+    <div>
+      <span (click)="backPage()" class="material-symbols-outlined" [ngClass]="{'active': categories.number > 0}">arrow_back_ios</span>
+      <button *ngFor="let page of [].constructor(categories.totalPages); let i = index"
+      (click)="getCategories(); selectPage(i)"
+      [ngClass]="{'selected': selectedPage === i}">{{ i + 1 }}</button>
+      <span (click)="nextPage()" class="material-symbols-outlined" [ngClass]="{'active': categories.number < categories.totalPages - 1}">arrow_forward_ios</span>
+    </div>
+  </div>
+</section>

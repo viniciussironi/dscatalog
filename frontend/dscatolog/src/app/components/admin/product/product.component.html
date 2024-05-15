@@ -1,0 +1,50 @@
+<section class="app-add-product">
+  <div class="top">
+    <form class="busca" (submit)="onSubmit($event)">
+      <div>
+        <input type="text" [formControl]="productName" placeholder="Nome do produto">
+        <button><span class="material-symbols-outlined">search</span></button>
+      </div>
+      <select name="categoria" [formControl]="categoryId" (change)="onSubmit($event)">
+        <option value="">Categorias</option>
+        <option *ngFor="let category of categories.content" value="{{ category.id }}">{{ category.name }}</option>
+      </select>
+      <input type="reset" value="LIMPAR FILTRO" (click)="resetFilters()">
+    </form>
+    <a href="/admin/add-product">
+      <button class="btn-add">ADICIONAR</button>
+    </a>
+  </div>
+  <div class="produtos">
+    <div class="produto" *ngFor="let product of products.content">
+      <div class="left">
+        <img src="{{ product.imgUrl }}" alt="Imagem do produto">
+      </div>
+      <div class="interno">
+        <div class="center">
+          <h2>{{ product.name }}</h2>
+          <p><span>R$</span>{{ product.price | number:'2.2-2':'pt' }}</p>
+          <div class="categorias">
+            <a href="" *ngFor="let category of product.categories"> <!-- Tem que ser aqui o loop -->
+              <button class="category">{{ category.name }}</button>
+            </a>
+          </div>
+        </div>
+        <div class="right">
+          <a [routerLink]="['/admin/edit-product', product.id]"><button id="edit">EDITAR</button></a>
+          <button id="delete" (click)="deleteProduct(product.id)">EXCLUIR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pages">
+    <div>
+      <span (click)="backPage()" class="material-symbols-outlined" [ngClass]="{'active': products.number > 0}">arrow_back_ios</span>
+      <button *ngFor="let page of [].constructor(products.totalPages); let i = index"
+      (click)="getProducts(i, productName.value + '', categoryId.value + ''); selectPage(i)"
+      [ngClass]="{'selected': selectedPage === i}">{{ i + 1 }}</button>
+      <span (click)="nextPage()" class="material-symbols-outlined" [ngClass]="{'active': products.number < products.totalPages - 1}">arrow_forward_ios</span>
+    </div>
+  </div>
+</section>

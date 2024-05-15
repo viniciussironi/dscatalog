@@ -1,0 +1,50 @@
+<section class="app-add-user">
+  <h2>DADOS DO PRODUTO</h2>
+  <div class="inputs">
+    <form>
+      <mat-form-field class="firstName">
+        <mat-label>Nome</mat-label>
+        <input matInput [formControl]="firstName" type="text">
+        @if (firstName.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="lastName">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput [formControl]="lastName" type="text">
+        @if (lastName.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="email">
+        <mat-label>Email</mat-label>
+        <input matInput [formControl]="email" type="text">
+        @if (email.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+        @if (email.hasError('email')) {
+          <mat-error>Digite um <strong>e-mail</strong> válido</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="password1">
+        <mat-label>Senha</mat-label>
+        <input matInput [formControl]="password1" type="text">
+        @if (password1.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="password2">
+        <mat-label>Repita a senha</mat-label>
+        <input matInput [formControl]="password2" type="text">
+        @if (password2.hasError('required')) {
+          <mat-error>Compo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+    </form>
+  </div>
+  <app-buttons-admin (click)="insertCategory()"></app-buttons-admin>
+</section>

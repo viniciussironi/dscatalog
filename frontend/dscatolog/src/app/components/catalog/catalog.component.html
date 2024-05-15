@@ -1,0 +1,28 @@
+<section class="app-catalog">
+  <h2>Catálogo de produtos</h2>
+  <form class="busca" (submit)="onSubmit($event)">
+      <div>
+          <input type="text" [formControl]="productName" placeholder="Nome do produto">
+          <button><span class="material-symbols-outlined">search</span></button>
+      </div>
+      <select name="categoria" [formControl]="categoryId" (change)="onSubmit($event)">
+          <option value="">Categorias</option>
+          <option *ngFor="let category of categories.content" value="{{ category.id }}">{{ category.name }}</option>
+      </select>
+      <input type="reset" value="LIMPAR FILTRO" (click)="resetFilters()">
+  </form>
+  <div class="produtos">
+      <a *ngFor="let product of products.content" class="produto" [routerLink]="['/products', product.id]">
+          <img src="{{ product.imgUrl }}" alt="Imagem produto">
+          <h3>{{ product.name }}</h3>
+          <p><span>R$</span>{{ product.price | number:'2.2-2':'pt' }}</p>
+      </a>
+  </div>
+  <div class="pages">
+      <span (click)="backPage()" class="material-symbols-outlined" [ngClass]="{'active': products.number > 0}">arrow_back_ios</span>
+      <button *ngFor="let page of [].constructor(products.totalPages); let i = index"
+      (click)="getProducts(i, productName.value + '', categoryId.value + ''); selectPage(i)"
+      [ngClass]="{'selected': selectedPage === i}">{{ i + 1 }}</button>
+      <span (click)="nextPage()" class="material-symbols-outlined" [ngClass]="{'active': products.number < products.totalPages - 1}">arrow_forward_ios</span>
+  </div>
+</section>

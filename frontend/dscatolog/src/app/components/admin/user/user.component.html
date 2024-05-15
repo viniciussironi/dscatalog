@@ -1,0 +1,40 @@
+<section class="app-user-crud">
+  <div class="top">
+    <h1>Usuários</h1>
+    <a href="/admin/add-user">
+      <button class="btn-add">ADICIONAR</button>
+    </a>
+  </div>
+  <div class="users">
+    <div class="user" *ngFor="let user of users.content">
+      <div class="intern">
+        <div class="left">
+          <div>
+            <h5>{{ user.firstName }}</h5>
+            <h5>{{ user.lastName }}</h5>
+          </div>
+          <p>{{ user.email}}</p>
+        </div>
+        <div class="roles">
+          <a href="" *ngFor="let role of user.roles">
+            <button class="role">{{ role.authority }}</button>
+          </a>
+        </div>
+      </div>
+        <div class="right">
+          <button id="edit">EDITAR</button>
+          <button id="delete" (click)="deleteUser(user.id)">EXCLUIR</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="pages">
+    <div>
+      <span (click)="backPage()" class="material-symbols-outlined" [ngClass]="{'active': users.number > 0}">arrow_back_ios</span>
+      <button *ngFor="let page of [].constructor(users.totalPages); let i = index"
+      (click)="getUsers(); selectPage(i)"
+      [ngClass]="{'selected': selectedPage === i}">{{ i + 1 }}</button>
+      <span (click)="nextPage()" class="material-symbols-outlined" [ngClass]="{'active': users.number < users.totalPages - 1}">arrow_forward_ios</span>
+    </div>
+  </div>
+</section>
